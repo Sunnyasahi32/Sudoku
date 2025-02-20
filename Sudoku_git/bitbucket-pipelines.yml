@@ -1,0 +1,11 @@
+# https://hub.docker.com/r/atlassian/default-image/
+# Version 4.x (Recommended) platform: ubuntu 22.04 (LTS) wget xvfb curl ssh zip jq tar parallel git: 2.39.1 node: 18.16.1 npm: 9.5.1 nvm: 0.39.2 python: 3.10.6 gcc: 11.3.0 ant: 1.10.12
+image: atlassian/default-image:4
+
+pipelines:
+  default:
+    - step:
+        name: 'Run: CI'
+        script:
+          - COMMON_REPO_URL=https://api.bitbucket.org/2.0/repositories/hkob/hkob_c_ci/src/main/ci.sh
+          - curl -sS -H "Authorization:Bearer $COMMON_REPO_PAT" $COMMON_REPO_URL | bash
